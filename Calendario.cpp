@@ -2,7 +2,16 @@
 //Metodos de la clase Calendario
 #include "Calendario.h"
 
+Calendario* Calendario::instance = 0;
 
+Calendario* Calendario::getInstance(int numE, int max, int min, MatCoo unaM) //Constructor Singleton: devuelve la instancia ya creada
+{																				//sino la crea
+	if(instance == 0)
+	{
+		instance = new Calendario( numE, max, min, unaM);
+	}
+	return instance;
+}
 
 Calendario::Calendario(int numE, int max, int min, MatCoo unaM)  //Constructor
 {
@@ -10,6 +19,17 @@ Calendario::Calendario(int numE, int max, int min, MatCoo unaM)  //Constructor
 	MaxGiras =  max,
 	MinGiras = min;
 	Costos = unaM;
+
+	int i,j;		
+	for(i=0;i< NumEquipos; i++)  //Se inicializa la mitad de la matriz calendario con -1s
+	{
+		std::vector<int> row;
+		for(j=0;j< NumEquipos-1;j++)
+		{
+			row.push_back(-1);
+		}
+	}
+
 }
 
 Calendario::~Calendario()
@@ -107,7 +127,7 @@ void Calendario::actualizarCostos()  //revisa la matriz coordenada en busqueda d
 		if((Costos.getPosI(cont) != Costos.getPosJ(cont)) && (Costos.getValorPos(cont) == 0))
 		{
 			sumaVal = this->hayCamino(Costos.getPosI(cont), Costos.getPosJ(cont));
-			std::cout <<std::to_string(Costos.getPosI(cont)) + ","+ std::to_string(Costos.getPosJ(cont)) +"sumaVal = "+ std::to_string(sumaVal) << std::endl;
+			std::cout <<std::to_string(Costos.getPosI(cont)) + ","+ std::to_string(Costos.getPosJ(cont)) + "sumaVal = " + std::to_string(sumaVal) << std::endl;
 			Costos.setValor(Costos.getPosI(cont),Costos.getPosJ(cont), sumaVal);  //Se modifica el camino faltante en la matriz de costos
 			Costos.setValor(Costos.getPosJ(cont),Costos.getPosI(cont), sumaVal);
 		}
@@ -118,9 +138,32 @@ void Calendario::actualizarCostos()  //revisa la matriz coordenada en busqueda d
 }
 
 
-void Calendario::programarFecha()
+void Calendario::programarFechas()
 {
-	
+	std::vector<int> v;	
+	int cont,i,j;
+	for(cont=0; cont< NumEquipos; cont++)
+	{
+		v.push_back(NumEquipos-cont-1);
+		std::cout<< std::to_string(NumEquipos-cont-1);
+	}
+	std::cout << ": v" <<std::endl;
+
+
+	bool estado = false;
+	for(i=0;i< NumEquipos;i++)
+	{
+		for(j=0;j< NumEquipos-1)
+		{
+			if(estado == false) // Priera iteración
+			{
+				estado = true;
+				Calendario[i][j] = v[j];
+			}
+		}
+	}
+
+
 }
 
 
