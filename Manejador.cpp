@@ -81,8 +81,8 @@ Calendario Manejador::programarFechas(Calendario unC)
 void Manejador::iniciar() //inicia la informacion y actualiza los caminos no directos
 {
 	MatCoo unaM = this->cargarInfo();
-	Calendario Calen = Calendario(unaM.getNumE(), unaM.getMax(), unaM.getMin(), unaM);
-	Calen.actualizarCostos();
+	Calendario *Calen = Calendario::getInstance(unaM.getNumE(), unaM.getMax(), unaM.getMin(), unaM);
+	Calen->actualizarCostos();
 	
 
 }
