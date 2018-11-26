@@ -82,7 +82,8 @@ void Manejador::iniciar() //inicia la informacion y actualiza los caminos no dir
 {
 	MatCoo unaM = this->cargarInfo();
 	Calendario *Calen = Calendario::getInstance(unaM.getNumE(), unaM.getMax(), unaM.getMin(), unaM);
-	Calen->actualizarCostos();
+	//Calen->actualizarCostos();
+	Calen->programarFechas();
 	
 
 }

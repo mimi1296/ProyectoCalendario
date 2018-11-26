@@ -34,8 +34,12 @@ public:
 	int getMinGiras();
 	MatCoo getMatCostos();
 	int menorCosto(std::vector<Ciudad*> Nodo);
-	int hayCamino(int i, int j); 
+	int hayCamino(int i, int j);
+	std::vector<int> organizarVector(int primero, std::vector<int> v);
 	void actualizarCostos();
+	bool existe(int val,std::vector<int> v);
+	std::vector<int> vecEquipos();
+	void limpiarUnos();
 	void programarFechas();
 
 
